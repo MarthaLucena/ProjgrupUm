@@ -25,11 +25,20 @@ class Questionario:
         # Adiciona as respostas ao conjunto de respostas
         self.conjunto_respostas.append(respostas)
 
-        # Se 1000 respostas foram salvas, gera o arquivo CSV e fecha a interface
-        if len(self.conjunto_respostas) == 1000:
-            self.salvar_arquivo_csv()
+    def salvar_respostas(self, entries, root):
+    # Obtém as respostas dos campos de entrada
+        respostas = [entry.get() for entry in entries]
+    
+    # Verifica se a idade é "00"
+        if respostas[0] == "00":
+            self.salvar_arquivo_csv()  # Salva as respostas antes de finalizar o programa
             root.destroy()
         else:
+            # Adiciona a data e hora como última resposta
+            respostas.append(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            # Adiciona as respostas ao conjunto de respostas
+            self.conjunto_respostas.append(respostas)
+
             # Limpa os campos de entrada
             for entry in entries:
                 entry.delete(0, tk.END)
@@ -81,3 +90,27 @@ class Questionario:
 if __name__ == "__main__":
     questionario = Questionario()
     questionario.criar_formulario()
+
+
+
+
+
+
+
+def salvar_respostas(self, entries, root):
+    # Obtém as respostas dos campos de entrada
+    respostas = [entry.get() for entry in entries]
+    
+    # Verifica se a idade é "00"
+    if respostas[0] == "00":
+        self.salvar_arquivo_csv()  # Salva as respostas antes de finalizar o programa
+        root.destroy()
+    else:
+        # Adiciona a data e hora como última resposta
+        respostas.append(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        # Adiciona as respostas ao conjunto de respostas
+        self.conjunto_respostas.append(respostas)
+
+        # Limpa os campos de entrada
+        for entry in entries:
+            entry.delete(0, tk.END)
